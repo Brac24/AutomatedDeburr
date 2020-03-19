@@ -1,22 +1,22 @@
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QPushButton, QWidget
+from PySide2.QtWidgets import QApplication, QMainWindow
+from PySide2.QtUiTools import QUiLoader
+from ui_mainwindow import Ui_MainWindow
 
-# In this application we are laying out the GUI using code
-
-# Disadvantages
-# 1. GUI would not be portable (i.e. will have to redo GUI if rewritten in C++)
-class Form(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
-        QMainWindow.__init__(self)
-        start_button = QPushButton("Start")
-        hlayout = QHBoxLayout()
-        hlayout.addWidget(start_button)
-        widget = QWidget()
-        widget.setLayout(hlayout)
-        self.setCentralWidget(widget)
+        super(MainWindow, self).__init__()
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+        self.start_button.clicked.connect(self.start)
+              
+    def start(self):
+        incrementedTotal = self.lcdNumber.intValue() + 1
+        self.lcdNumber.display(incrementedTotal)
+
 
 if __name__ == "__main__":
     app = QApplication()
-    main_window = Form()
-    main_window.show()
+    window = MainWindow()
+    window.show()
     app.exec_()

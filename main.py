@@ -9,10 +9,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
         self.start_button.clicked.connect(self.start)
-              
+
     def start(self):
-        incrementedTotal = self.lcdNumber.intValue() + 1
-        self.lcdNumber.display(incrementedTotal)
+        incremented_total = self.lcdNumber.intValue() + 1
+        self.lcdNumber.display(incremented_total)
 
 
 if __name__ == "__main__":

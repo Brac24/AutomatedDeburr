@@ -11,7 +11,7 @@
 #    where the old element name is referenced. This is easy with the rename tool but can become
 #    cumbersome if we don't remember what the old element name was.
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QPushButton, QWidget
+from PySide2.QtWidgets import QApplication, QMainWindow
 from PySide2.QtUiTools import QUiLoader
 from ui_mainwindow import Ui_MainWindow
 

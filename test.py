@@ -13,6 +13,6 @@ if __name__ == "__main__":
     app = QApplication()
     loader = QUiLoader()
     ui = loader.load('test.ui')
-    my_widget = ui.cancelButton # access of ui element.
+    my_widget = ui.cancelButton # access of ui element simply using the element name. Will not be recognized until runtime
     ui.show()
     app.exec_()

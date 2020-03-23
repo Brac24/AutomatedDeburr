@@ -32,8 +32,6 @@ class MotorController:
             return 'Could not connect to motor controller ' + error.__str__()
 
         is_connected = True
-        return is_connected
-         #print("Could not connect to motor controller " + error.__str__())
 
 
 if __name__ == "__main__":

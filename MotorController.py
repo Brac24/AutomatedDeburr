@@ -28,9 +28,10 @@ class MotorController:
         try:
             MotorController.serial_connection = serial.Serial("/dev/ttyUSB0")
             MotorController.serial_connection.baudrate = 115200
+            MotorController.serial_connection.xonxoff = True
             MotorController.is_connected = True
-            ser.write('G0 X4\r\n'.encode('utf-8')) #Need to do an absolute move on any axis to be able to do relative moves
-            ser.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
+            MotorController.serial_connection.write('G0 X4\r\n'.encode('utf-8')) #Need to do an absolute move on any axis to be able to do relative moves
+            MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
         except serial.SerialException as error:
             return 'Could not connect to motor controller ' + error.__str__()     
 

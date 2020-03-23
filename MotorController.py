@@ -27,10 +27,10 @@ class MotorController:
         try:
             se = serial.Serial("/dev/ttyUSB0")
             se.baudrate = 115200
+            MotorController.is_connected = True
         except serial.SerialException as error:
             return 'Could not connect to motor controller ' + error.__str__()
-
-        is_connected = True
+        
 
 
 if __name__ == "__main__":

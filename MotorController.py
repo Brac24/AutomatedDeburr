@@ -37,5 +37,13 @@ if __name__ == "__main__":
     print("hi")
     ser = serial.Serial("/dev/ttyUSB0")
     ser.baudrate = 115200
-    ser.write('G91 A20\r\n'.encode('utf-8'))  # Relative move of rotary
+    ser.xonxoff = True
+   # ser.rtscts = True
+   # ser.reset_input_buffer()
+   # ser.reset_output_buffer()
+    
+   # ser.write('G0 X4\r\n'.encode('utf-8'))
+   # ser.write('b!%\n'.encode('utf-8'))
+   # ser.write('\r\n'.encode('utf-8'))
+    ser.write('G91 A2\r\n'.encode('utf-8'))  # Relative move of rotary
     ser.close()

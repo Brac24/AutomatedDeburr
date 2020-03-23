@@ -6,3 +6,7 @@ class DeburrController:
         self.name = name
         self.motor_controller = MotorController()
         self.motor_controller.connect()
+
+    def start_deburr(self):
+        print('start deburr')
+        

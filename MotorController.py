@@ -6,14 +6,15 @@ from threading import Timer
 
 
 class MotorController:
-    is_connected = None
+    is_connected = False
+    serial_connection = None
 
     def __init__(self, name='motor'):
         self.name = name
 
     def start_motor(self):
         print('motor start')
-        ser.write('G91 A20\r\n'.encode('utf-8'))
+        MotorController.serial_connection.write('G91 A20\r\n'.encode('utf-8'))
 
     def emergency_stop(self):
         print("Emergency Stop")
@@ -25,12 +26,11 @@ class MotorController:
     def connect():
         """Connect to the motor controller serially (RS-232)"""
         try:
-            se = serial.Serial("/dev/ttyUSB0")
-            se.baudrate = 115200
+            MotorController.serial_connection = serial.Serial("/dev/ttyUSB0")
+            MotorController.serial_connection.baudrate = 115200
             MotorController.is_connected = True
         except serial.SerialException as error:
-            return 'Could not connect to motor controller ' + error.__str__()
-        
+            return 'Could not connect to motor controller ' + error.__str__()     
 
 
 if __name__ == "__main__":

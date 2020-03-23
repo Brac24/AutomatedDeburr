@@ -6,11 +6,10 @@ from threading import Timer
 
 
 class MotorController:
-    is_connected = False
+    is_connected = None
 
     def __init__(self, name='motor'):
         self.name = name
-        
 
     def start_motor(self):
         print('motor start')

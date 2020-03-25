@@ -17,14 +17,13 @@ class DeburrController:
         if error is not None:
             return error.__str__()
 
-    def start_deburr(self):
+    def start_deburr(self, op_time):
         if self.motor_controller.is_connected:
             print('start deburr')
             self.led.on()
             self.motor_controller.start_motor()
-            time.sleep(2)
+            time.sleep(op_time)
             self.led.off()
-            
         else:
             return 'Motor controller is not connected'
         

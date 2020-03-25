@@ -1,5 +1,6 @@
 import sys
 from PySide2.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PySide2.QtGui import QValidator, QIntValidator
 from PySide2.QtUiTools import QUiLoader
 from ui_mainwindow import Ui_MainWindow
 from MotorController import MotorController
@@ -15,9 +16,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.start_button.clicked.connect(self.start)
         self.stop_button.clicked.connect(self.stop)
         self.deburr_controller = None
+        validator = QIntValidator(1, 100, self)
+        self.operation_time_entry.setValidator(validator)
 
     def start(self):
-        error = self.deburr_controller.start_deburr()
+        error = self.deburr_controller.start_deburr(self.operation_time_entry.text)
         if error is None:
             incremented_total = self.lcdNumber.intValue() + 1
             self.lcdNumber.display(incremented_total)

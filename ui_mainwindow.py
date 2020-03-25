@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'main_ui.ui',
 # licensing of 'main_ui.ui' applies.
 #
-# Created: Wed Mar 25 14:35:27 2020
+# Created: Wed Mar 25 14:36:36 2020
 #      by: pyside2-uic  running on PySide2 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -70,7 +70,7 @@ class Ui_MainWindow(object):
         self.elapsed_time_label.setObjectName("elapsed_time_label")
         self.horizontalLayout_3.addWidget(self.elapsed_time_label)
         self.layoutWidget2 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget2.setGeometry(QtCore.QRect(190, 140, 301, 41))
+        self.layoutWidget2.setGeometry(QtCore.QRect(190, 140, 301, 51))
         self.layoutWidget2.setObjectName("layoutWidget2")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.layoutWidget2)
         self.horizontalLayout_4.setSpacing(0)

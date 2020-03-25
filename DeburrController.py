@@ -22,7 +22,7 @@ class DeburrController:
             print('start deburr')
             self.led.on()
             self.motor_controller.start_motor()
-            time.sleep(op_time)
+            time.sleep(int(op_time))
             self.led.off()
         else:
             return 'Motor controller is not connected'

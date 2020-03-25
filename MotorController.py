@@ -33,7 +33,7 @@ class MotorController:
             MotorController.serial_connection.write('G0 X4\r\n'.encode('utf-8')) #Need to do an absolute move on any axis to be able to do relative moves
             MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
         except serial.SerialException as error:
-            return 'Could not connect to motor controller ' + error.__str__()     
+            return 'Could not connect to motor controller ' + error.__str__()
 
 
 if __name__ == "__main__":

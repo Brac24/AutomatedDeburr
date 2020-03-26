@@ -26,15 +26,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.max_deburr_time = 0
 
     def update_elapsed_time(self):
-        if self.current_elapsed_time == self.max_deburr_time - 1:   
+        if self.current_elapsed_time == (self.max_deburr_time - 1):
             self.timer.stop()
             self.deburr_controller.stop_deburr()
+            incremented_total = self.lcdNumber.intValue() + 1            # Increment number of deburred pieces
+            self.lcdNumber.display(incremented_total)                    # Update displays of deburred pieces
         
-        self.current_elapsed_time = self.current_elapsed_time + 1
+        self.current_elapsed_time = self.current_elapsed_time - 1
         self.elapsed_time_label.setText(f'{self.current_elapsed_time}')
 
     def reset_elapsed_time(self):
-        self.current_elapsed_time = 0
+        self.current_elapsed_time = self.max_deburr_time
         self.elapsed_time_label.setText(f'{self.current_elapsed_time}')
 
     def start(self):
@@ -47,8 +49,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.reset_elapsed_time()                                    # Reset time at start of operation
             self.max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
             self.timer.start()                                           # Start timer
-            incremented_total = self.lcdNumber.intValue() + 1            # Increment number of deburred pieces
-            self.lcdNumber.display(incremented_total)                    # Update displays of deburred pieces
         else:
             self.display_error(error)
 

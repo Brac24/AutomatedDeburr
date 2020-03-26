@@ -20,7 +20,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.operation_time_entry.setValidator(validator)
 
     def start(self):
-        if self.operation_time_entry.text() is None:
+        if self.operation_time_entry.text() == "":
             error = "Please Enter an Operation Time"
         else:
             error = self.deburr_controller.start_deburr(self.operation_time_entry.text())

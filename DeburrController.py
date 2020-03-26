@@ -1,7 +1,6 @@
 import serial
 from gpiozero import LED
 from MotorController import MotorController
-import time
 
 class DeburrController:
     def __init__(self, name='deburr controller'):
@@ -21,10 +20,12 @@ class DeburrController:
         if self.motor_controller.is_connected:
             print('start deburr')
             self.led.on()
-            self.motor_controller.start_motor()
-            op_time_int = int(op_time)
-            time.sleep(op_time_int)
-            self.led.off()
+            self.motor_controller.start_motor() #This method should eventually take in op_time as a parameter to change rotary velocity
         else:
             return 'Motor controller is not connected'
+
+    def stop_deburr(self):
+        print('stop deburr')
+        self.led.off()
+
         

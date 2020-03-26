@@ -44,6 +44,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
 
         if error is None:
+            self.reset_elapsed_time()                                    # Reset time at start of operation
             self.max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
             self.timer.start()                                           # Start timer
             incremented_total = self.lcdNumber.intValue() + 1            # Increment number of deburred pieces

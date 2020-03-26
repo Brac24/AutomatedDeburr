@@ -14,7 +14,7 @@ class MotorController:
 
     def start_motor(self):
         print('motor start')
-        MotorController.serial_connection.write('G91 A20\r\n'.encode('utf-8'))
+        MotorController.serial_connection.write('G91 A360\r\n'.encode('utf-8'))
 
     def emergency_stop(self):
         print("Emergency Stop")

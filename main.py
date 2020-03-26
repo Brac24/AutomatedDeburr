@@ -20,7 +20,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.operation_time_entry.setValidator(validator)
 
     def start(self):
-        error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
+        if self.operation_time_entry.text() is None:
+            error = "Please Enter an Operation Time"
+        else:
+            error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
+
         if error is None:
             incremented_total = self.lcdNumber.intValue() + 1
             self.lcdNumber.display(incremented_total)

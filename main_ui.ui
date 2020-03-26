@@ -99,7 +99,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Elapsed Time:</string>
+        <string>Time Left:</string>
        </property>
       </widget>
      </item>

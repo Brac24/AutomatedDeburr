@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'main_ui.ui',
 # licensing of 'main_ui.ui' applies.
 #
-# Created: Wed Mar 25 14:36:36 2020
+# Created: Thu Mar 26 12:28:38 2020
 #      by: pyside2-uic  running on PySide2 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -115,7 +115,7 @@ class Ui_MainWindow(object):
         self.label.setText(QtWidgets.QApplication.translate("MainWindow", "Parts Deburred:", None, -1))
         self.start_button.setText(QtWidgets.QApplication.translate("MainWindow", "Start", None, -1))
         self.stop_button.setText(QtWidgets.QApplication.translate("MainWindow", "Stop", None, -1))
-        self.label_2.setText(QtWidgets.QApplication.translate("MainWindow", "Elapsed Time:", None, -1))
+        self.label_2.setText(QtWidgets.QApplication.translate("MainWindow", "Time Left:", None, -1))
         self.elapsed_time_label.setText(QtWidgets.QApplication.translate("MainWindow", "0", None, -1))
         self.label_4.setText(QtWidgets.QApplication.translate("MainWindow", "Operation Run Time (seconds):", None, -1))
 

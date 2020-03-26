@@ -2,6 +2,7 @@ import sys
 from PySide2.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PySide2.QtGui import QValidator, QIntValidator
 from PySide2.QtUiTools import QUiLoader
+from PySide2.QtCore import QTimer
 from ui_mainwindow import Ui_MainWindow
 from MotorController import MotorController
 from DeburrController import DeburrController
@@ -18,6 +19,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.deburr_controller = None
         validator = QIntValidator(1, 100, self)
         self.operation_time_entry.setValidator(validator)
+        self.current_elapsed_time = 0
+        self.timer = QTimer(self)
+        self.timer.setInterval(1000)
+        self.timer.timeout.connect(self.update_elapsed_time)
+
+    def update_elapsed_time(self):
+        self.elapsed_time_label.setText(f'{self.current_elapsed_time+1}')
+
+    def reset_elapsed_time(self):
+        self.current_elapsed_time = 0
+        self.elapsed_time_label.setText(f'{self.current_elapsed_time}')
 
     def start(self):
         if self.operation_time_entry.text() == "":
@@ -26,6 +38,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
 
         if error is None:
+            self.timer.start()
             incremented_total = self.lcdNumber.intValue() + 1
             self.lcdNumber.display(incremented_total)
         else:

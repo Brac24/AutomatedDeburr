@@ -19,8 +19,9 @@ class DeburrController:
     def start_deburr(self, op_time):
         if self.motor_controller.is_connected:
             print('start deburr')
-            self.led.on()
             self.motor_controller.start_motor(op_time) #This method should eventually take in op_time as a parameter to change rotary velocity
+            self.led.on()
+            
         else:
             return 'Motor controller is not connected'
 

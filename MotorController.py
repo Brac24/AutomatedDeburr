@@ -17,7 +17,7 @@ class MotorController:
         velocity = (360/int(op_time)) * 60 # degrees/min
         MotorController.serial_connection.write(f'$avm {velocity}\r\n'.encode('utf-8'))
         MotorController.serial_connection.write('G91 A360\r\n'.encode('utf-8'))
-        MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
+        #MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
 
     def emergency_stop(self):
         print("Emergency Stop")

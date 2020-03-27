@@ -15,7 +15,7 @@ class MotorController:
     def start_motor(self, op_time):
         print('motor start')
         velocity = (360/int(op_time)) * 60 # degrees/min
-        MotorController.serial_connection.write(f'$avm {velocity}\r\n')
+        MotorController.serial_connection.write(f'$avm {velocity}\r\n'.encode('utf-8'))
         MotorController.serial_connection.write('G91 A360\r\n'.encode('utf-8'))
 
     def emergency_stop(self):

@@ -14,10 +14,13 @@ class MotorController:
 
     def start_motor(self, op_time):
         print('motor start')
-        velocity = (360/int(op_time)) * 60 # degrees/min
-        MotorController.serial_connection.write(f'$avm {velocity}\r\n'.encode('utf-8'))
+        velocity = (360/int(op_time)) * 60 # degrees/min 1200 deg/min ~= 13s
+        if velocity > 1200:
+            print(f'velocity is {velocity}')
+        else:
+            MotorController.serial_connection.write(f'$avm {velocity}\r\n'.encode('utf-8'))
         time.sleep(1)
-        MotorController.serial_connection.write('G91 A360\r\n'.encode('utf-8'))
+        MotorController.serial_connection.write('G0 A360\r\n'.encode('utf-8'))
         time.sleep(1)
         #MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
 

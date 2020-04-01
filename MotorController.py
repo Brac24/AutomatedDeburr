@@ -17,6 +17,7 @@ class MotorController:
         velocity = (360/int(op_time)) * 60 # degrees/min 1200 deg/min ~= 13s
         if velocity > 1200:
             print(f'velocity is {velocity}')
+            MotorController.serial_connection.write(f'$avm {1200}\r\n'.encode('utf-8'))
         else:
             MotorController.serial_connection.write(f'$avm {velocity}\r\n'.encode('utf-8'))
         time.sleep(1)

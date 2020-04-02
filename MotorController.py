@@ -29,6 +29,7 @@ class MotorController:
         while True:
             line = MotorController.serial_connection.readline()
             print(line.decode('utf-8'))
+            time.sleep(.01)
             if not line:
                 break
         #MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug

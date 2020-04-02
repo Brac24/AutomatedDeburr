@@ -36,9 +36,9 @@ class MotorController:
 
     def stop_print(self):
         print('motor stop')
-        bytes = MotorController.serial_connection.in_waiting
-        print(bytes)
-        rcv =  MotorController.serial_connection.read(bytes)
+        data_bytes = MotorController.serial_connection.in_waiting
+        print(data_bytes)
+        rcv =  MotorController.serial_connection.read(data_bytes)
         print(rcv.decode('utf-8'))
 
     @staticmethod

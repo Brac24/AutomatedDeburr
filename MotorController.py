@@ -23,6 +23,8 @@ class MotorController:
         time.sleep(1)
         MotorController.serial_connection.write('G0 A360\r\n'.encode('utf-8'))
         time.sleep(1)
+        MotorController.serial_connection.reset_input_buffer()
+        MotorController.serial_connection.reset_output_buffer()
         #MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
 
     def emergency_stop(self):
@@ -38,6 +40,9 @@ class MotorController:
             MotorController.serial_connection = serial.Serial("/dev/ttyUSB0")
             MotorController.serial_connection.baudrate = 115200
             MotorController.serial_connection.xonxoff = True
+            MotorController.serial_connection.stopbits = serial.STOPBITS_ONE
+            MotorController.serial_connection.parity = serial.PARITY_NONE
+            MotorController.serial_connection.bytesize = serial.EIGHTBITS
             MotorController.is_connected = True
             MotorController.serial_connection.write('G0 X4\r\n'.encode('utf-8')) #Need to do an absolute move on any axis to be able to do relative moves
             MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug

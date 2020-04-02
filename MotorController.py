@@ -21,9 +21,11 @@ class MotorController:
         else:
             MotorController.serial_connection.write(f'$avm {velocity}\r\n'.encode('utf-8'))
         time.sleep(1)
-        MotorController.serial_connection.write('G0 A360\r\n'.encode('utf-8'))
+        MotorController.serial_connection.write('G91 A360\r\n'.encode('utf-8'))
         time.sleep(1)
         print(MotorController.serial_connection.in_waiting)
+        rcv = MotorController.serial_connection.read(MotorController.serial_connection.in_waiting)
+        print(rcv.decode('utf-8'))
         #MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
 
     def emergency_stop(self):
@@ -31,6 +33,10 @@ class MotorController:
 
     def stop_print(self):
         print('motor stop')
+        bytes = MotorController.serial_connection.in_waiting
+        print(bytes)
+        rcv =  MotorController.serial_connection.read(bytes)
+        print(rcv.decode('utf-8'))
 
     @staticmethod
     def connect():

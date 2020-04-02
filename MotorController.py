@@ -26,9 +26,11 @@ class MotorController:
         print(MotorController.serial_connection.in_waiting)
         rcv = MotorController.serial_connection.read(MotorController.serial_connection.in_waiting)
         print(rcv.decode('utf-8'))
-        for line in MotorController.serial_connection.read():
+        while True:
             line = MotorController.serial_connection.readline()
             print(line.decode('utf-8'))
+            if not line:
+                break
         #MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
 
     def emergency_stop(self):
@@ -38,7 +40,7 @@ class MotorController:
         print('motor stop')
         data_bytes = MotorController.serial_connection.in_waiting
         print(data_bytes)
-        rcv =  MotorController.serial_connection.read(data_bytes)
+        rcv = MotorController.serial_connection.read(data_bytes)
         print(rcv.decode('utf-8'))
 
     @staticmethod
@@ -46,6 +48,7 @@ class MotorController:
         """Connect to the motor controller serially (RS-232)"""
         try:
             MotorController.serial_connection = serial.Serial("/dev/ttyUSB0")
+            MotorController.serial_connection.timeout = 1
             MotorController.serial_connection.baudrate = 115200
             MotorController.serial_connection.xonxoff = True
             MotorController.serial_connection.stopbits = serial.STOPBITS_ONE

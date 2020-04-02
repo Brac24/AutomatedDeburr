@@ -26,6 +26,9 @@ class MotorController:
         print(MotorController.serial_connection.in_waiting)
         rcv = MotorController.serial_connection.read(MotorController.serial_connection.in_waiting)
         print(rcv.decode('utf-8'))
+        for line in MotorController.serial_connection.read():
+            line = MotorController.serial_connection.readline()
+            print(line.decode('utf-8'))
         #MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
 
     def emergency_stop(self):

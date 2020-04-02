@@ -23,8 +23,7 @@ class MotorController:
         time.sleep(1)
         MotorController.serial_connection.write('G0 A360\r\n'.encode('utf-8'))
         time.sleep(1)
-        MotorController.serial_connection.reset_input_buffer()
-        MotorController.serial_connection.reset_output_buffer()
+        print(MotorController.serial_connection.in_waiting)
         #MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
 
     def emergency_stop(self):

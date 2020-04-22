@@ -22,7 +22,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.operation_time_entry.setValidator(validator)
         self.current_elapsed_time = 0
         self.timer = QTimer(self)
-        self.timer.exec_()
         self.timer.setInterval(1000)
         self.timer.timeout.connect(self.update_elapsed_time)
         self.max_deburr_time = 0
@@ -53,7 +52,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
        # if error is None:
         self.max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
         self.reset_elapsed_time()                                    # Reset time at start of operation
-        self.timer.start()                                           # Start timer
+        self.timer.exec_()                                    # Start timer
         self.deburr_controller.start_deburr(self.operation_time_entry.text())
         #t.join()
         if error is not None:

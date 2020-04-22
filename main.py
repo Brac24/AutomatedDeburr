@@ -18,10 +18,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.start_button.clicked.connect(self.start)
         self.stop_button.clicked.connect(self.stop)
         self.deburr_controller = None
-        validator = QIntValidator(13, 200, self) # Validator for the operation time input. Only allow values 1 to 100 seconds
+        validator = QIntValidator(1, 200, self) # Validator for the operation time input. Only allow values 1 to 100 seconds
         self.operation_time_entry.setValidator(validator)
         self.current_elapsed_time = 0
         self.timer = QTimer(self)
+        self.timer.exec_()
         self.timer.setInterval(1000)
         self.timer.timeout.connect(self.update_elapsed_time)
         self.max_deburr_time = 0

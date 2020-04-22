@@ -9,6 +9,6 @@ class Worker(QRunnable):
         self.fn = fn
         self.args = args
 
-    @Slot
+    @Slot()
     def run(self):
         self.fn(*self.args)

@@ -1,4 +1,5 @@
 import serial
+import threading
 from gpiozero import LED
 from MotorController import MotorController
 
@@ -19,8 +20,12 @@ class DeburrController:
     def start_deburr(self, op_time):
         if self.motor_controller.is_connected:
             print('start deburr')
-            self.motor_controller.start_motor(op_time) #Starting turning rotary at a given velocity based on op cycle time
-            self.led.on()           
+            t = threading.Thread(target=self.motor_controller.start_motor, args=(op_time,))
+            t2 = threading.Thread(target=self.led.on)
+            t.start()#self.motor_controller.start_motor(op_time) #Starting turning rotary at a given velocity based on op cycle time
+            t2.start()#self.led.on()           
+            t.join()
+            t2.join()
         else:
             return 'Motor controller is not connected'
 

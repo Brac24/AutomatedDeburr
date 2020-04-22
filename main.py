@@ -1,4 +1,5 @@
 import sys
+import threading
 from PySide2.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PySide2.QtGui import QValidator, QIntValidator
 from PySide2.QtUiTools import QUiLoader
@@ -40,16 +41,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.elapsed_time_label.setText(f'{self.current_elapsed_time}')
 
     def start(self):
+        t = threading.Thread(target=self.deburr_controller.start_deburr, args=(self.operation_time_entry.text(),))
+
         if self.operation_time_entry.text() == "":
             error = "Please Enter an Operation Time"
         else:
-            error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
+            t.start()#error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
+            error = None
 
-        if error is None:
-            self.max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
-            self.reset_elapsed_time()                                    # Reset time at start of operation
-            self.timer.start()                                           # Start timer
-        else:
+       # if error is None:
+        self.max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
+        self.reset_elapsed_time()                                    # Reset time at start of operation
+        self.timer.start()                                           # Start timer
+        t.join()
+        if error != None:
             self.display_error(error)
 
     def display_error(self, msg):

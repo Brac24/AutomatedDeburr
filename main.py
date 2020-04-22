@@ -23,7 +23,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.current_elapsed_time = 0
         self.timer = QTimer(self)
         self.timer.setInterval(1000)
-        self.timer.update.connect(self.update_elapsed_time)
+        self.timer.timeout.connect(self.update_elapsed_time)
         self.max_deburr_time = 0
 
     def update_elapsed_time(self):

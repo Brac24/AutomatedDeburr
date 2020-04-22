@@ -3,10 +3,12 @@ from WorkerSignals import WorkerSignals
 
 class Worker(QRunnable):
 
-    def __init__(self):
+    def __init__(self, fn, *args):
         super(Worker, self).__init__()
 
-        self.signals = WorkerSignals()
+        self.fn = fn
+        self.args = args
 
-    #@Slot
-    #def run(self):
+    @Slot
+    def run(self):
+        self.fn(*self.args)

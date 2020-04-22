@@ -54,8 +54,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
        # if error is None:
         self.max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
         self.reset_elapsed_time()                                    # Reset time at start of operation
-        self.timer.start()                                           # Start timer
         self.thread_pool.start(worker)#self.deburr_controller.start_deburr(self.operation_time_entry.text())
+        self.timer.start()                                           # Start timer
         #t.join()
         
         if error is not None:

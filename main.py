@@ -1,5 +1,6 @@
 import sys
 import threading
+import time
 from PySide2.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PySide2.QtGui import QValidator, QIntValidator
 from PySide2.QtUiTools import QUiLoader
@@ -31,6 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def update_elapsed_time(self):
         if (self.current_elapsed_time - 1) == 0:
             self.timer.stop()
+            time.sleep(.5) #sleep for half second before turning dc motors off to synchonize a bit with rotary
             self.deburr_controller.stop_deburr()
             incremented_total = self.lcdNumber.intValue() + 1            # Increment number of deburred pieces
             self.lcdNumber.display(incremented_total)                    # Update displays of deburred pieces

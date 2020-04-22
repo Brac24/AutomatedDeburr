@@ -23,7 +23,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.current_elapsed_time = 0
         self.timer = QTimer(self)
         self.timer.setInterval(1000)
-        self.timer.timeout.connect(self.update_elapsed_time)
+        self.timer.update.connect(self.update_elapsed_time)
         self.max_deburr_time = 0
 
     def update_elapsed_time(self):
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def start(self):
         #t = threading.Thread(target=self.deburr_controller.start_deburr, args=(self.operation_time_entry.text(),))
-        t2 = threading.Thread(target=self.timer.exec)
+        t2 = threading.Thread(target=self.timer.start)
         if self.operation_time_entry.text() == "":
             error = "Please Enter an Operation Time"
         else:

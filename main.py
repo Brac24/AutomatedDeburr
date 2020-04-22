@@ -46,13 +46,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.operation_time_entry.text() == "":
             error = "Please Enter an Operation Time"
         else:
-            t.start()#error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
+            #error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
             error = None
 
        # if error is None:
         self.max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
         self.reset_elapsed_time()                                    # Reset time at start of operation
         self.timer.start()                                           # Start timer
+        t.start()
         t.join()
         if error != None:
             self.display_error(error)

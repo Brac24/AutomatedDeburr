@@ -43,7 +43,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def start(self):
         t = threading.Thread(target=self.deburr_controller.start_deburr, args=(self.operation_time_entry.text(),))
         t2 = threading.Thread(target=self.update_elapsed_time)
-        t2 = threading.Thread(target=self.timer.start)
+        t3 = threading.Thread(target=self.timer.start)
 
         if self.operation_time_entry.text() == "":
             error = "Please Enter an Operation Time"

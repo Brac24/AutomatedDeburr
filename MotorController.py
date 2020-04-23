@@ -38,6 +38,8 @@ class MotorController:
         print("Emergency Stop")
 
     def stop_print(self):
+        MotorController.serial_connection.write('M2 \r\n'.encode('utf-8'))
+        MotorController.serial_connection.write('M30 \r\n'.encode('utf-8'))
         print('motor stop')
         data_bytes = MotorController.serial_connection.in_waiting
         print(data_bytes)

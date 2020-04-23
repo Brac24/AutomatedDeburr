@@ -40,7 +40,7 @@ class MotorController:
     def stop_print(self):
         MotorController.serial_connection.write('! \r\n'.encode('utf-8'))
         time.sleep(1)
-        MotorController.serial_connection.write('^x \r\n'.encode('utf-8'))
+        MotorController.serial_connection.write('\x18 \r\n'.encode('utf-8'))
         print('motor stop')
         data_bytes = MotorController.serial_connection.in_waiting
         print(data_bytes)

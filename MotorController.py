@@ -39,6 +39,9 @@ class MotorController:
         MotorController.serial_connection.write('! \r\n'.encode('utf-8'))
         time.sleep(1)
         MotorController.serial_connection.write('\x18 \r\n'.encode('utf-8'))
+        time.sleep(5)
+        MotorController.serial_connection.write('G0 X4\r\n'.encode('utf-8')) #Need to do an absolute move on any axis to be able to do relative moves
+        MotorController.serial_connection.write('b!%\n'.encode('utf-8'))     #This line allows for the first command to complete else the command never ends. Don't know why maybe some end of line character or buffer bug
 
     def stop_print(self):
         print('motor stop')

@@ -70,8 +70,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def stop(self):
         self.deburr_controller.e_stop()
-        time.sleep(5)
-        self.initialize()
 
 
     def initialize(self):

@@ -36,6 +36,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.deburr_controller.stop_deburr()
             incremented_total = self.lcdNumber.intValue() + 1            # Increment number of deburred pieces
             self.lcdNumber.display(incremented_total)                    # Update displays of deburred pieces
+            self.start_button.setDisabled(False)
         
         self.current_elapsed_time = self.current_elapsed_time - 1
         self.elapsed_time_label.setText(f'{self.current_elapsed_time}')
@@ -62,6 +63,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         if error is not None:
             self.display_error(error)
+        else:
+            self.start_button.setDisabled(True)
 
     def display_error(self, msg):
         msg_box = QMessageBox()

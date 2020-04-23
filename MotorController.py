@@ -36,11 +36,11 @@ class MotorController:
 
     def emergency_stop(self):
         print("Emergency Stop")
-
-    def stop_print(self):
         MotorController.serial_connection.write('! \r\n'.encode('utf-8'))
         time.sleep(1)
         MotorController.serial_connection.write('\x18 \r\n'.encode('utf-8'))
+
+    def stop_print(self):
         print('motor stop')
         data_bytes = MotorController.serial_connection.in_waiting
         print(data_bytes)

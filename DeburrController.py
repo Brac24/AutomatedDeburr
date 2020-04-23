@@ -34,4 +34,7 @@ class DeburrController:
         self.led.off()
         self.motor_controller.stop_print()
 
+    def e_stop(self):
+        self.led.off()
+        self.motor_controller.emergency_stop()
         

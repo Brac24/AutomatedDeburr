@@ -69,7 +69,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         msg_box.exec_()
 
     def stop(self):
-        self.deburr_controller.stop_deburr()
+        self.deburr_controller.e_stop()
+        time.sleep(5)
+        self.initialize()
 
 
     def initialize(self):

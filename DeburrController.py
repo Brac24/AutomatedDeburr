@@ -3,7 +3,11 @@ import threading
 from gpiozero import LED
 from MotorController import MotorController
 
+
 class DeburrController:
+    """
+    This Controller contains hardware specific libraries for raspberry pi
+    """
     def __init__(self, name='deburr controller'):
         self.name = name
         self.motor_controller = None

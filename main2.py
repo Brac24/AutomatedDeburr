@@ -31,32 +31,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.thread_pool = QThreadPool()
 
     def update_elapsed_time(self):
-        if (self.current_elapsed_time - 1) == 0:
+        time_left = self.main_controller.update_elapsed()
+        self.elapsed_time_label.setText(f'{time_left}')
+
+        if (self.main_controller.is_done()):
             self.timer.stop()
-            time.sleep(.5) #sleep for half second before turning dc motors off to synchonize a bit with rotary
-            self.main_controller.stop_deburr()
-            incremented_total = self.lcdNumber.intValue() + 1            # Increment number of deburred pieces
-            self.lcdNumber.display(incremented_total)                    # Update displays of deburred pieces
             self.start_button.setDisabled(False)
-        
-        self.current_elapsed_time = self.current_elapsed_time - 1
-        self.elapsed_time_label.setText(f'{self.current_elapsed_time}')
+            parts_deburred = self.main_controller.stop()
+            self.lcdNumber.display(parts_deburred)                    # Update displays of deburred pieces
+              
 
     def reset_elapsed_time(self):
         self.current_elapsed_time = self.max_deburr_time
-        self.elapsed_time_label.setText(f'{self.current_elapsed_time}')
+        
 
     def start(self):
-        worker = Worker(self.main_controller.start_deburr, self.operation_time_entry.text())
         if self.operation_time_entry.text() == "":
             error = "Please Enter an Operation Time"
-        else:
-            #error = self.deburr_controller.start_deburr(self.operation_time_entry.text())
-            error = None
+        else: error = None
 
        # if error is None:
-        self.max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
-        self.reset_elapsed_time()                                    # Reset time at start of operation
+        max_deburr_time = int(self.operation_time_entry.text()) # Set total operation time
+        worker = Worker(self.main_controller.start, max_deburr_time)
+        self.elapsed_time_label.setText(f'{max_deburr_time}') # Reset time label at start of operation
         self.thread_pool.start(worker)#self.deburr_controller.start_deburr(self.operation_time_entry.text())
         self.timer.start()                                           # Start timer
         #t.join()
@@ -72,7 +69,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         msg_box.exec_()
 
     def stop(self):
-        self.main_controller.e_stop()
+        if self.main_controller.is_in_progress():
+            self.timer.stop()
+            time_left = self.main_controller.e_stop() # Tiny G is reset here
+            # User must wait for Tiny G to reset.
+            # We need a way to know when the system is ready to go
+            # Start button should be disabled until the system is ready
+            self.start_button.setDisabled(False) # for now we will enable start button right away
+            self.elapsed_time_label.setText(f'{time_left}')
+        else:
+            self.display_error('System is not running')
 
 
     def initialize(self):
